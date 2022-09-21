@@ -28,26 +28,35 @@ ggsave("HW1_Fig_1_scatterplot.pdf", height = 4, width = 6)
 
 # Problem 2
 
-Create a data frame comprised of:
+The data frame below is comprised of a random sample of size 10 from a standard normal distribution, a logical vector indicating whether elements of the sample are greater than 0, a character vector of length 10, and a factor vector of length 10 with 3 different factor “levels”.
 
-a random sample of size 10 from a standard Normal distribution
-a logical vector indicating whether elements of the sample are greater than 0
-a character vector of length 10
-a factor vector of length 10, with 3 different factor “levels”
-
-
-```{r df_create}
+```{r df_create, echo = FALSE}
 set.seed(5)
 
 prob2_df = tibble(
  norm_samp = rnorm(10),
- norm_samp_logical = norm_samp> 0,
+ vec_logical = norm_samp > 0,
+ vec_character = character(length = 10),
+ vec_factor = factor(c("1","2","3","1","2","3","1","2","3","3"))
 )
 ```
-Try to take the mean of each variable in your dataframe. What works and what doesn’t?
 
+```{r, echo = FALSE}
+prob2_df
+```
 
-Hint: to take the mean of a variable in a dataframe, you need to pull the variable out of the dataframe. Try loading the tidyverse and using the pull function.
+* The mean of the norm_samp variable is `r mean(pull(prob2_df, norm_samp))`.
+* The mean of the vec_logical variable is `r mean(pull(prob2_df, vec_logical))`.
+* The mean of the vec_character variable is `r mean(pull(prob2_df, vec_character))`.
+* The mean of the vec_factor variable is `r mean(pull(prob2_df, vec_factor))`.
 
-In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens, and why? Does this help explain what happens when you try to take the mean?
+The mean is able to be calculated from the norm_samp values and from the logical vector. Taking the mean of the character and factor variables does not work.
+
+However, the code chunk below can be used to coerce non-numeric variables to be treated as an integer (e.g. to convert categorical level to a numeric value) and could then be used  to calculate the mean of the factor variable. This will not affect the already-calculated mean of the norm_samp and logical variables.
+```{r, eval = FALSE}
+mean(as.numeric(pull(prob2_df, norm_samp)))
+mean(as.numeric(pull(prob2_df, vec_logical)))
+mean(as.numeric(pull(prob2_df, vec_character)))
+mean(as.numeric(pull(prob2_df, vec_factor)))
+```
 
