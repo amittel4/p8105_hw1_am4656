@@ -1,9 +1,0 @@
----
-title: "Homework 1"
-output: github_document
----
-
-```{r}
-data("penguins",package = "palmerpenguins")
-```
-
