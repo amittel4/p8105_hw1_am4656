@@ -1,0 +1,29 @@
+---
+title: "Homework 1"
+author: "Aaron Mittel"
+date: "Authored on 09-21-2022"
+output: github_document
+---
+
+```{r, echo=FALSE, message=FALSE}
+data("penguins",package = "palmerpenguins")
+library(tidyverse)
+```
+
+# Problem 1
+
+The penguins dataset includes location, time, and anatomic features of individual penguins. Notable features of the tabulated data include the following:
+
+* Important variable names include: `r colnames(penguins)`.
+* The number of rows is `r nrow(penguins)`.
+* The number of columns is `r ncol(penguins)`.
+* The mean flipper length, in millimeters, if we ignore missing values is `r mean(penguins$flipper_length_mm, na.rm=TRUE)`.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(penguins,aes(x = bill_length_mm, y = flipper_length_mm,color=species)) + geom_point()
+ggsave("HW1_Fig_1_scatterplot.pdf", height = 4, width = 6)
+```
+**Figure 1**: Scatterplot of flipper length (mm) versus bill length (mm). Species is indicated by color (red = Adelie, green = Chinstrap, blue = Gentoo)
+
+
+# Problem 2
