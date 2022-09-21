@@ -5,7 +5,7 @@ date: "Authored on 09-21-2022"
 output: github_document
 ---
 
-```{r, echo=FALSE, message=FALSE}
+```{r setup, echo=FALSE, message=FALSE}
 data("penguins",package = "palmerpenguins")
 library(tidyverse)
 ```
@@ -27,3 +27,27 @@ ggsave("HW1_Fig_1_scatterplot.pdf", height = 4, width = 6)
 
 
 # Problem 2
+
+Create a data frame comprised of:
+
+a random sample of size 10 from a standard Normal distribution
+a logical vector indicating whether elements of the sample are greater than 0
+a character vector of length 10
+a factor vector of length 10, with 3 different factor “levels”
+
+
+```{r df_create}
+set.seed(5)
+
+prob2_df = tibble(
+ norm_samp = rnorm(10),
+ norm_samp_logical = norm_samp> 0,
+)
+```
+Try to take the mean of each variable in your dataframe. What works and what doesn’t?
+
+
+Hint: to take the mean of a variable in a dataframe, you need to pull the variable out of the dataframe. Try loading the tidyverse and using the pull function.
+
+In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens, and why? Does this help explain what happens when you try to take the mean?
+
